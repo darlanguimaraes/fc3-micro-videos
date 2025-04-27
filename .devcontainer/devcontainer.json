@@ -23,7 +23,7 @@
 		}
 	},
 	"mounts": [
-		"type=bind,source=${localEnv:HOME}/.ssh,target=/root/.ssh,readonly"
+		"type=bind,source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,readonly"
 	],
 	"customizations": {
 		"vscode": {
