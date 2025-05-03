@@ -109,13 +109,14 @@ describe("InMemoryRepository Unit Tests", () => {
   it("should throws error on delete when entity not found", async () => {
     const uuid = new Uuid();
     await expect(repo.delete(uuid)).rejects.toThrow(
-      new NotFoundError(uuid.id, StubEntity)
+      new NotFoundError(uuid, StubEntity)
     );
 
+    const validUuid = new Uuid("9366b7dc-2d71-4799-b91c-c64adb205104");
     await expect(
-      repo.delete(new Uuid("9366b7dc-2d71-4799-b91c-c64adb205104"))
+      repo.delete(validUuid)
     ).rejects.toThrow(
-      new NotFoundError("9366b7dc-2d71-4799-b91c-c64adb205104", StubEntity)
+      new NotFoundError(validUuid, StubEntity)
     );
   });
 
