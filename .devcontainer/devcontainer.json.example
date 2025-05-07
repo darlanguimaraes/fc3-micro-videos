@@ -28,10 +28,11 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"eslinter.vscode-eslint",
-				"prettier.vscode-prettier",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
 				"Orta.vscode-jest",
-				"firsttris.vscode-jest-runner"
+				"firsttris.vscode-jest-runner",
+				"vivaxy.vscode-conventional-commits"
 			]
 		}
 	}

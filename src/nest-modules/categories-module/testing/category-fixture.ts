@@ -286,9 +286,9 @@ export class ListCategoriesFixture {
             entitiesMap.first,
           ],
           meta: {
-            current_page: 1,
-            last_page: 1,
-            per_page: 15,
+            currentPage: 1,
+            lastPage: 1,
+            perPage: 15,
             total: 4,
           },
         },
@@ -296,14 +296,14 @@ export class ListCategoriesFixture {
       {
         send_data: {
           page: 1,
-          per_page: 2,
+          perPage: 2,
         },
         expected: {
           entities: [entitiesMap.fourth, entitiesMap.third],
           meta: {
-            current_page: 1,
-            last_page: 2,
-            per_page: 2,
+            currentPage: 1,
+            lastPage: 2,
+            perPage: 2,
             total: 4,
           },
         },
@@ -311,14 +311,14 @@ export class ListCategoriesFixture {
       {
         send_data: {
           page: 2,
-          per_page: 2,
+          perPage: 2,
         },
         expected: {
           entities: [entitiesMap.second, entitiesMap.first],
           meta: {
-            current_page: 2,
-            last_page: 2,
-            per_page: 2,
+            currentPage: 2,
+            lastPage: 2,
+            perPage: 2,
             total: 4,
           },
         },
@@ -343,7 +343,7 @@ export class ListCategoriesFixture {
       {
         send_data: {
           page: 1,
-          per_page: 2,
+          perPage: 2,
           sort: 'name',
           filter: 'a',
         },
@@ -351,16 +351,16 @@ export class ListCategoriesFixture {
           entities: [entitiesMap.AAA, entitiesMap.AaA],
           meta: {
             total: 3,
-            current_page: 1,
-            last_page: 2,
-            per_page: 2,
+            currentPage: 1,
+            lastPage: 2,
+            perPage: 2,
           },
         },
       },
       {
         send_data: {
           page: 2,
-          per_page: 2,
+          perPage: 2,
           sort: 'name',
           filter: 'a',
         },
@@ -368,9 +368,9 @@ export class ListCategoriesFixture {
           entities: [entitiesMap.a],
           meta: {
             total: 3,
-            current_page: 2,
-            last_page: 2,
-            per_page: 2,
+            currentPage: 2,
+            lastPage: 2,
+            perPage: 2,
           },
         },
       },

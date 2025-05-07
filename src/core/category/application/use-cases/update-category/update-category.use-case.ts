@@ -11,8 +11,7 @@ import {
 import { UpdateCategoryInput } from './update-category.input';
 
 export class UpdateCategoryUseCase
-  implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput>
-{
+  implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput> {
   constructor(private readonly categoryRepository: ICategoryRepository) {}
 
   async execute(input: UpdateCategoryInput): Promise<UpdateCategoryOutput> {
@@ -23,7 +22,8 @@ export class UpdateCategoryUseCase
     }
 
     input.name && category.changeName(input.name);
-    if ('description' in input) {
+
+    if (input.description !== undefined) {
       category.changeDescription(input.description);
     }
     if (input.isActive === true) {

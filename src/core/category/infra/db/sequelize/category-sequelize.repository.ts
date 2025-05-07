@@ -1,4 +1,4 @@
-import { Op } from 'sequelize';
+import { literal, Op } from 'sequelize';
 import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
 import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../../../domain/category.entity';
@@ -9,15 +9,21 @@ import {
 } from '../../../domain/category.repository';
 import { CategoryModel } from './category.model';
 import { CategoryModelMapper } from './category-model.mapper';
+import { SortDirection } from '../../../../shared/domain/repository/search-params';
 
 export class CategorySequelizeRepository implements ICategoryRepository {
   sortableFields: string[] = ['name', 'createdAt'];
+  orderBy = {
+    mysql: {
+      name: (sortDir: SortDirection) => literal(`binary name ${sortDir}`),
+    },
+  };
 
   constructor(private categoryModel: typeof CategoryModel) {}
 
   async insert(entity: Category): Promise<void> {
     const model = CategoryModelMapper.toModel(entity);
-    this.categoryModel.create(model.toJSON());
+    await this.categoryModel.create(model.toJSON());
   }
 
   async bulkInsert(entities: Category[]): Promise<void> {
@@ -74,7 +80,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
         },
       }),
       ...(props.sort && this.sortableFields.includes(props.sort)
-        ? { order: [[props.sort, props.sortDir]] }
+        ? { order: this.formatSort(props.sort, props.sortDir) }
         : { order: [['createdAt', 'desc']] }),
       offset,
       limit,
@@ -87,6 +93,14 @@ export class CategorySequelizeRepository implements ICategoryRepository {
       perPage: props.perPage,
       total: count,
     });
+  }
+
+  private formatSort(sort: string, sortDir: SortDirection) {
+    const dialect = this.categoryModel.sequelize.getDialect() as 'mysql';
+    if (this.orderBy[dialect] && this.orderBy[dialect][sort]) {
+      return this.orderBy[dialect][sort](sortDir);
+    }
+    return [[sort, sortDir]];
   }
 
   getEntity(): new (...args: any[]) => Category {
