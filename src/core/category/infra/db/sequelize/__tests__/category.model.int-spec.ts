@@ -18,7 +18,7 @@ describe('CategoryModel Integration Tests', () => {
 
     const categoryIdAttr = attributesMap.categoryId;
     expect(categoryIdAttr).toMatchObject({
-      field: 'categoryId',
+      field: 'category_id',
       fieldName: 'categoryId',
       primaryKey: true,
       type: DataType.UUID(),
@@ -42,7 +42,7 @@ describe('CategoryModel Integration Tests', () => {
 
     const isActiveAttr = attributesMap.isActive;
     expect(isActiveAttr).toMatchObject({
-      field: 'isActive',
+      field: 'is_active',
       fieldName: 'isActive',
       allowNull: false,
       type: DataType.BOOLEAN(),
@@ -50,7 +50,7 @@ describe('CategoryModel Integration Tests', () => {
 
     const createdAtAttr = attributesMap.createdAt;
     expect(createdAtAttr).toMatchObject({
-      field: 'createdAt',
+      field: 'created_at',
       fieldName: 'createdAt',
       allowNull: false,
       type: DataType.DATE(3),
